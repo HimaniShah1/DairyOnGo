@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "987583801153",
+    "project_id": "dairyongo",
+    "storage_bucket": "dairyongo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987583801153:android:5392ccbba71198260f23c0",
+        "android_client_info": {
+          "package_name": "com.example.dairyongo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987583801153-ssta9lgg301vc9gqg078p6tnk0gbnqbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi7T5lNuzVAW88jDNMJRvJoWU2KIle2q0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987583801153-ssta9lgg301vc9gqg078p6tnk0gbnqbt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

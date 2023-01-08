@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>987583801153-u352n9fant27f7kqlsfjuiea10lgl6s9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.987583801153-u352n9fant27f7kqlsfjuiea10lgl6s9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB9ThItE3aMwT_4vm8zhWxRGf4jIXmBl5o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>987583801153</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.dairyongo</string>
+	<key>PROJECT_ID</key>
+	<string>dairyongo</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dairyongo.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:987583801153:ios:0e240867f987ad850f23c0</string>
+</dict>
+</plist>

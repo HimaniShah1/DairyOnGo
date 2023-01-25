@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
-import '../firebase_options.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -32,69 +31,67 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //horizontal bar at the top of the app
         title: const Text('Login'),
       ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              return Column(
-                children: [
-                  TextField(
-                    //text field for email
-                    controller: _email,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                        hintText: 'Enter your email here'),
-                  ),
-                  TextField(
-                    //text field for password
-                    controller: _password,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    decoration: const InputDecoration(
-                        hintText: 'Enter your password here'),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      final email =
-                          _email.text; //grabbing the text from the controller
-                      final password = _password.text;
-                      //to handle the exception of user not found or anything else, we use the try and catch block
-                      try {
-                        final userCredential = await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: email, password: password);
-                        print(userCredential);
-                      } on FirebaseAuthException catch (e) {
-                        //catching the specific exception of user not found
-                        if (e.code == 'user-not-found') {
-                          //e.code shows the exception code when an exception is encountered
-                          print('User not found');
-                        } else if (e.code == 'wrong-password') {
-                          print('Wrong Password');
-                        } else {
-                          print('Something went wrong');
-                          print(e.code);
-                        }
-                      }
-                    },
-                    child: const Text('Login'),
-                  ),
-                ],
+      body: Column(
+        children: [
+          TextField(
+            //text field for email
+            controller: _email,
+            enableSuggestions: false,
+            autocorrect: false,
+            keyboardType: TextInputType.emailAddress,
+            decoration:
+                const InputDecoration(hintText: 'Enter your email here'),
+          ),
+          TextField(
+            //text field for password
+            controller: _password,
+            obscureText: true,
+            enableSuggestions: false,
+            autocorrect: false,
+            decoration:
+                const InputDecoration(hintText: 'Enter your password here'),
+          ),
+
+          //Login Button
+          TextButton(
+            onPressed: () async {
+              final email = _email.text; //grabbing the text from the controller
+              final password = _password.text;
+              //to handle the exception of user not found or anything else, we use the try and catch block
+              try {
+                final userCredential = await FirebaseAuth.instance
+                    .signInWithEmailAndPassword(
+                        email: email, password: password);
+                print(userCredential);
+              } on FirebaseAuthException catch (e) {
+                //catching the specific exception of user not found
+                if (e.code == 'user-not-found') {
+                  //e.code shows the exception code when an exception is encountered
+                  print('User not found');
+                } else if (e.code == 'wrong-password') {
+                  print('Wrong Password');
+                } else {
+                  print('Something went wrong');
+                  print(e.code);
+                }
+              }
+            },
+            child: const Text('Login'),
+          ),
+
+          //Button to go from LoginView to RegisterView
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                '/register/',
+                (route) => false,
               );
-            default: // TODO: Handle this case.
-              return const Text(
-                  'Loading...'); //if there is any prblem or a delay in loading the screen then loading... will appear
-          }
-        },
+            },
+            child: const Text('Not registered yet? Register here!'),
+          )
+        ],
       ),
     );
   }

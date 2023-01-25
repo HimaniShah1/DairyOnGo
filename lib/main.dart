@@ -1,4 +1,6 @@
 import 'package:dairyongo/views/login_view.dart';
+import 'package:dairyongo/views/register_view.dart';
+import 'package:dairyongo/views/verify_email_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,12 @@ void main() {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
+
+      //routes to go from login view to register view and vice versa
+      routes: {
+        '/login/': (context) => const LoginView(),
+        '/register/': (context) => const RegisterView(),
+      },
     ),
   );
 }
@@ -23,31 +31,28 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        //horizontal bar at the top of the app
-        title: const Text('Home'),
+    return FutureBuilder(
+      future: Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
       ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              final user = FirebaseAuth.instance.currentUser;
-              if (user?.emailVerified ?? false) {
-                print('You are a verified user');
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.done:
+            final user = FirebaseAuth.instance.currentUser;
+            if (user != null) {
+              if (user.emailVerified) {
+                print('Email is verified');
               } else {
-                print('You need to verify your email first');
+                return const VerifyEmailView();
               }
-              return const Text('Done');
-            default: // TODO: Handle this case.
-              return const Text(
-                  'Loading...'); //if there is any prblem or a delay in loading the screen then loading... will appear
-          }
-        },
-      ),
+            } else {
+              return const LoginView();
+            }
+            return const Text('Done');
+          default: // TODO: Handle this case.
+            return const CircularProgressIndicator(); //if there is any prblem or a delay in loading the screen then loading... will appear
+        }
+      },
     );
   }
 }
